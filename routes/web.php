@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::get('/',[DashboardController::class, 'getHomePage'])->name('homePage');
+Route::get('/contact',[DashboardController::class, 'getContactPage'])->name('contactPage');
+Route::get('/manage',[DashboardController::class, 'getManagePage'])->name('managePage');
+
+// Book
+Route::get('/manage/create',[BookController::class, 'getCreateBook'])->name('createBookPage');
+Route::post('/manage/create',[BookController::class, 'createBook'])->name('createBook');

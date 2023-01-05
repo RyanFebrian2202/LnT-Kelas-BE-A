@@ -24,5 +24,10 @@ Route::get('/contact',[DashboardController::class, 'getContactPage'])->name('con
 Route::get('/manage',[DashboardController::class, 'getManagePage'])->name('managePage');
 
 // Book
-Route::get('/manage/create',[BookController::class, 'getCreateBook'])->name('createBookPage');
+Route::get('/manage/create',[BookController::class, 'getCreateBook'])->name('getBookPage');
 Route::post('/manage/create',[BookController::class, 'createBook'])->name('createBook');
+
+Route::get('/manage/update/{id}',[BookController::class, 'getUpdateBook'])->name('getUpdateBook');
+Route::patch('/manage/update/{id}',[BookController::class,'updateBook'])->name('updateBook');
+
+Route::delete('/manage/delete/{id}',[BookController::class, 'deleteBook'])->name('deleteBook');

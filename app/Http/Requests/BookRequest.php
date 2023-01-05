@@ -27,11 +27,9 @@ class BookRequest extends FormRequest
             'judul'=>'required|string|min:8'
         ];
 
-        // $messages = [
-        //     'judul.required' => 'The :attribute and :other must match.',
-        //     'size' => 'The :attribute must be exactly :size.',
-        //     'between' => 'The :attribute value :input is not between :min - :max.',
-        //     'in' => 'The :attribute must be one of the following types: :values',
-        // ];
+        $messages = [
+            'judul.required' => 'Judul harus diisi!',
+            'judul.min' => 'Judul minimal 8 huruf'
+        ];
     }
 }

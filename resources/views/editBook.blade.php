@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Create Book')
+@section('title','Update Book')
 
 @section('content')
 <div class="container">
@@ -9,33 +9,35 @@
         
       </div>
       <div class="col-5">
-        <form class="container bg-light rounded-4 p-5 shadow" action="{{route('createBook')}}" method="POST" enctype="multipart/form-data">
+        <form class="container bg-light rounded-4 p-5 shadow" action="{{route('updateBook',['id'=>$book->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="d-flex justify-content-center">
-                <h2>Create Book</h2>
+                <h2>Update Book</h2>
             </div>
             <br>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Judul</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="judul" value="{{old('judul')}}">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="judul" value="{{$book->judul}}">
             </div>
             @error('judul')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="mb-3">
                 <label for="" class="form-label">Penulis</label>
-                <input type="text" class="form-control" name="penulis" value="{{old('penulis')}}">
+                <input type="text" class="form-control" name="penulis" value="{{$book->penulis}}">
             </div>
             @error('penulis')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Sinopsis</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sinopsis" value="{{old('sinopsis')}}"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sinopsis" value="{{$book->sinopsis}}">{{$book->sinopsis}}
+                </textarea>
               </div>
             <div class="mb-3">
                 <label for="" class="form-label">Tahun Terbt</label>
-                <input type="number" class="form-control" name="tahun_terbit" value="{{old('tahun_terbit')}}">
+                <input type="number" class="form-control" name="tahun_terbit" value="{{$book->tahun_terbit}}">
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>

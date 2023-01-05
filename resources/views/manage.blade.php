@@ -6,7 +6,7 @@
 <div class="container m-3 d-flex flex-column">
     <div class="d-flex gap-3">
         <h3><i class="uil uil-apps"></i> Manage Books</h3>
-        <a href="{{route('createBookPage')}}"><button type="button" class="btn btn-secondary">Add Books</button></a>
+        <a href="{{route('getBookPage')}}"><button type="button" class="btn btn-secondary">Add Books</button></a>
     </div>
     <hr>
     <table class="table table-bordered">
@@ -28,8 +28,16 @@
               <td>{{$book->judul}}</td>
               <td>{{$book->tahun_terbit}}</td>
               <td>
-                <button type="button" class="btn btn-success"><i class="uil uil-edit"></i></button>
-                <button type="button" class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>
+                <div style="display: flex; gap: 5px">
+                  <a href="{{route('getUpdateBook',['id'=>$book->id])}}">
+                    <button type="button" class="btn btn-success"><i class="uil uil-edit"></i></button>
+                  </a>
+                  <form action="{{route('deleteBook',['id'=>$book->id])}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>
+                  </form>
+                </div>
               </td>
             </tr>
             @endforeach

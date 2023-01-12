@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class BookController extends Controller
 {
     public function getCreateBook(){
-        return view('createBook');
+        $categories = Category::all();
+
+        return view('createBook',compact('categories'));
     }
 
     public function createBook(BookRequest $request){
@@ -25,7 +28,8 @@ class BookController extends Controller
             'judul' => $judul,
             'sinopsis' => $request -> sinopsis,
             'penulis' => $request -> penulis,
-            'tahun_terbit' => $request -> tahun_terbit
+            'tahun_terbit' => $request -> tahun_terbit,
+            'category_id' => $request -> category_id
         ]);
 
         return redirect(route('managePage'));
@@ -33,8 +37,9 @@ class BookController extends Controller
 
     public function getUpdateBook($id){
         $book = Book::findOrFail($id);
+        $categories = Category::all();
         
-        return view('editBook',compact('book'));
+        return view('editBook',compact('book','categories'));
     }
 
     public function updateBook(BookRequest $request, $id){
@@ -44,7 +49,8 @@ class BookController extends Controller
             'judul' => $request->judul,
             'sinopsis' => $request -> sinopsis,
             'penulis' => $request -> penulis,
-            'tahun_terbit' => $request -> tahun_terbit
+            'tahun_terbit' => $request -> tahun_terbit,
+            'category_id' => $request -> category_id
         ]);
 
         return redirect(route('managePage'));

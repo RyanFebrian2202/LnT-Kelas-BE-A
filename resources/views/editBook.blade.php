@@ -36,9 +36,19 @@
                 </textarea>
               </div>
             <div class="mb-3">
-                <label for="" class="form-label">Tahun Terbt</label>
+                <label for="" class="form-label">Tahun Terbit</label>
                 <input type="number" class="form-control" name="tahun_terbit" value="{{$book->tahun_terbit}}">
             </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Category</label>
+              <select name="category_id" id="">
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}" @if ($book->category_id == $category->id)
+                    selected
+                @endif>{{$category->name}}</option>
+                @endforeach
+              </select>
+          </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>

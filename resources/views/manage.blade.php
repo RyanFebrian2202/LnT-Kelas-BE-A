@@ -14,7 +14,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Judul Buku</th>
-              <th scope="col">Tahun Terbit</th>
+              <th scope="col">Category</th>
               <th scope="col">Aksi</th>
             </tr>
           </thead>
@@ -26,10 +26,10 @@
             <tr>
               <th scope="row">{{$nomor++}}</th>
               <td>{{$book->judul}}</td>
-              <td>{{$book->tahun_terbit}}</td>
+              <td>{{$book->category->name}}</td>
               <td>
                 <div style="display: flex; gap: 5px">
-                  <a href="{{route('getUpdateBook',['id'=>$book->id])}}">
+                  <a href="{{route('getUpdateBook',$book->id)}}">
                     <button type="button" class="btn btn-success"><i class="uil uil-edit"></i></button>
                   </a>
                   <form action="{{route('deleteBook',['id'=>$book->id])}}" method="POST">

@@ -31,12 +31,21 @@
             @enderror
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Sinopsis</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sinopsis" value="{{old('sinopsis')}}"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sinopsis" value="{{old('sinopsis')}}">{{old('sinopsis')}}</textarea>
               </div>
             <div class="mb-3">
                 <label for="" class="form-label">Tahun Terbt</label>
                 <input type="number" class="form-control" name="tahun_terbit" value="{{old('tahun_terbit')}}">
             </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Category</label>
+              <br>
+              <select name="category_id" id="">
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+              </select>
+          </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>

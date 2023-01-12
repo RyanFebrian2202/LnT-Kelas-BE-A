@@ -13,6 +13,11 @@ class Book extends Model
         'judul',
         'sinopsis',
         'penulis',
-        'tahun_terbit'
+        'tahun_terbit',
+        'category_id'
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('sinopsis');
-            $table->string('penulis');
+            $table->string('penerbit');
             $table->integer('tahun_terbit');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')

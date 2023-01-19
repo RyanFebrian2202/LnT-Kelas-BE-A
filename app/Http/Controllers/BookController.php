@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -24,13 +25,19 @@ class BookController extends Controller
 
         $judul = $request->judul;
 
-        Book::create([
-            'judul' => $judul,
-            'sinopsis' => $request -> sinopsis,
-            'penulis' => $request -> penulis,
-            'tahun_terbit' => $request -> tahun_terbit,
-            'category_id' => $request -> category_id
-        ]);
+        $book = 
+            Book::create([
+                'judul' => $judul,
+                'sinopsis' => $request -> sinopsis,
+                'penerbit' => $request -> penerbit,
+                'tahun_terbit' => $request -> tahun_terbit,
+                'category_id' => $request -> category_id
+            ]);
+
+        $authors = Author::findOrFail([1,2,3]);
+        $book->authors()->attach($authors);
+        $authorDelete = Author::findOrFail(3);
+        $book->authors()->detach($authorDelete);
 
         return redirect(route('managePage'));
     }
@@ -48,7 +55,7 @@ class BookController extends Controller
         $book->update([
             'judul' => $request->judul,
             'sinopsis' => $request -> sinopsis,
-            'penulis' => $request -> penulis,
+            'penerbit' => $request -> penerbit,
             'tahun_terbit' => $request -> tahun_terbit,
             'category_id' => $request -> category_id
         ]);

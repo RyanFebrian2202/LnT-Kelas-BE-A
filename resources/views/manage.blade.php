@@ -15,6 +15,7 @@
               <th scope="col">#</th>
               <th scope="col">Judul Buku</th>
               <th scope="col">Category</th>
+              <th scope="col">Code</th>
               <th scope="col">Aksi</th>
             </tr>
           </thead>
@@ -26,7 +27,16 @@
             <tr>
               <th scope="row">{{$nomor++}}</th>
               <td>{{$book->judul}}</td>
-              <td>{{$book->category->name}}</td>
+              <td>
+                @foreach ($book->category as $category)
+                {{$category->name}} 
+                @endforeach
+              </td>
+              <td>
+                @foreach ($book->codes as $category)
+                  {{$category->pivot->code}}
+                @endforeach
+              </td>
               <td>
                 <div style="display: flex; gap: 5px">
                   <a href="{{route('getUpdateBook',$book->id)}}">

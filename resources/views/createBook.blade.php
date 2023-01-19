@@ -40,11 +40,13 @@
             <div class="mb-3">
               <label for="" class="form-label">Category</label>
               <br>
-              <select name="category_id" id="">
+              {{-- <select name="category_id" id=""> --}}
                 @foreach ($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
+                {{-- <option value="{{$category->id}}">{{$category->name}}</option> --}}
+                <input type="checkbox" id="category_id" name="category_id" value="{{$category->id}}">
+                <label for="vehicle1">{{$category->name}}</label><br>
                 @endforeach
-              </select>
+              {{-- </select> --}}
           </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>

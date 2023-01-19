@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use PhpParser\Node\Expr\New_;
 
 class BookController extends Controller
 {
@@ -24,13 +25,28 @@ class BookController extends Controller
 
         $judul = $request->judul;
 
-        Book::create([
-            'judul' => $judul,
-            'sinopsis' => $request -> sinopsis,
-            'penulis' => $request -> penulis,
-            'tahun_terbit' => $request -> tahun_terbit,
-            'category_id' => $request -> category_id
-        ]);
+        $book = 
+            Book::create([
+                'judul' => $judul,
+                'sinopsis' => $request -> sinopsis,
+                'penulis' => $request -> penulis,
+                'tahun_terbit' => $request -> tahun_terbit
+            ]);
+
+        // dd($request->category_id);
+        // $categories = array();
+        // $categories.array_push($request->category_id);
+        
+        // $category = Category::findOrFail($request->category_id);
+        // $book->category()->attach($category);
+        // foreach($request->category_id as $id){
+        //     $category = Category::findOrFail($id);
+        //     $book->category()->attach($category);
+        // }
+        // $categories = Category::findOrFail($request->category_id);
+
+        $category = Category::findOrFail([1,2]);
+        $book->category()->attach($category);
 
         return redirect(route('managePage'));
     }

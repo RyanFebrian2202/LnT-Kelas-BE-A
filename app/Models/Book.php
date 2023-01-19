@@ -14,10 +14,15 @@ class Book extends Model
         'sinopsis',
         'penulis',
         'tahun_terbit',
-        'category_id'
     ];
 
     public function category(){
-        return $this->belongsTo(Category::class,'category_id');
+        return $this->belongsToMany(Category::class,'category_book','book_id','category_id')->withPivot('code');
+    }
+
+    public function codes(){
+        return $this->belongsToMany(Category::class,'category_book','book_id','category_id')
+            ->withPivot('code')
+            ->wherePivot('code','A1');
     }
 }

@@ -14,6 +14,6 @@ class Category extends Model
     ];
 
     public function book(){
-        return $this->hasMany(Book::class,'category_id');
+        return $this->belongsToMany(Book::class,'category_book','category_id','book_id')->withTimestamps();
     }
 }

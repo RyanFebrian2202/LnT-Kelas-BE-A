@@ -40,6 +40,10 @@
                 <input type="number" class="form-control" name="tahun_terbit" value="{{$book->tahun_terbit}}">
             </div>
             <div class="mb-3">
+              <label for="" class="form-label">Picture</label>
+              <input type="file" class="form-control" name="picture">
+            </div>
+            <div class="mb-3">
               <label for="" class="form-label">Category</label>
               <select name="category_id" id="">
                 @foreach ($categories as $category)

@@ -24,12 +24,14 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'judul'=>'required|string|min:8'
+            'judul'=>'required|string|min:8',
+            'penulis' => 'required|string|'
         ];
 
         $messages = [
             'judul.required' => 'Judul harus diisi!',
-            'judul.min' => 'Judul minimal 8 huruf'
+            'judul.min' => 'Judul minimal 8 huruf',
+            'penulis.required' => 'Penulis harus diisi'
         ];
     }
 }

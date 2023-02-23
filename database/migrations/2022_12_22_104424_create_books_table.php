@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sinopsis');
             $table->string('penulis');
             $table->integer('tahun_terbit');
+            $table->string('picture');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')
                             ->onUpdate('cascade')

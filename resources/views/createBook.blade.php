@@ -38,6 +38,13 @@
                 <input type="number" class="form-control" name="tahun_terbit" value="{{old('tahun_terbit')}}">
             </div>
             <div class="mb-3">
+              <label for="" class="form-label">Picture</label>
+              <input type="file" class="form-control" name="picture" value="{{old('picture')}}">
+            </div>
+            @error('picture')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="mb-3">
               <label for="" class="form-label">Category</label>
               <br>
               <select name="category_id" id="">

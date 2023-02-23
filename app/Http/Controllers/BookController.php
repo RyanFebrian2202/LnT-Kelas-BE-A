@@ -7,7 +7,9 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -18,26 +20,27 @@ class BookController extends Controller
     }
 
     public function createBook(BookRequest $request){
-        // $request->validate([
-        //     'judul' => 'required|string|min:8',
+        
+        $request->validate([
+            'picture' => 'required|mimes:png,jpg,jpeg,jfif'
+        ]);
 
-        // ]);
+        //file processing
+        $file = $request->picture;
+        $fullFileName = $file->getClientOriginalName();
+        $fileName = pathinfo($fullFileName)['filename'];
+        $extension = $file->getClientOriginalExtension();
+        $picture = $fileName . '-' . Str::random(10) . '-' . date('dmYhis') . '.' . $extension;
+        $file->storeAs('public/pictures/', $picture);
 
-        $judul = $request->judul;
-
-        $book = 
-            Book::create([
-                'judul' => $judul,
-                'sinopsis' => $request -> sinopsis,
-                'penerbit' => $request -> penerbit,
-                'tahun_terbit' => $request -> tahun_terbit,
-                'category_id' => $request -> category_id
-            ]);
-
-        $authors = Author::findOrFail([1,2,3]);
-        $book->authors()->attach($authors);
-        $authorDelete = Author::findOrFail(3);
-        $book->authors()->detach($authorDelete);
+        Book::create([
+            'judul' => $request->judul,
+            'sinopsis' => $request -> sinopsis,
+            'penulis' => $request -> penulis,
+            'tahun_terbit' => $request -> tahun_terbit,
+            'picture' => $picture,
+            'category_id' => $request -> category_id
+        ]);
 
         return redirect(route('managePage'));
     }
@@ -52,19 +55,50 @@ class BookController extends Controller
     public function updateBook(BookRequest $request, $id){
         $book = Book::findOrFail($id);
 
-        $book->update([
-            'judul' => $request->judul,
-            'sinopsis' => $request -> sinopsis,
-            'penerbit' => $request -> penerbit,
-            'tahun_terbit' => $request -> tahun_terbit,
-            'category_id' => $request -> category_id
-        ]);
+        if ($request->picture == null){
+            $book->update([
+                'judul' => $request->judul,
+                'sinopsis' => $request -> sinopsis,
+                'penulis' => $request -> penulis,
+                'tahun_terbit' => $request -> tahun_terbit,
+                'category_id' => $request -> category_id
+            ]);
+        } else {
+            $request->validate([
+                'picture' => 'required|mimes:png,jpg,jpeg,jfif'
+            ]);
+    
+            //file processing
+            $file = $request->picture;
+            $fullFileName = $file->getClientOriginalName();
+            $fileName = pathinfo($fullFileName)['filename'];
+            $extension = $file->getClientOriginalExtension();
+            $picture = $fileName . '-' . Str::random(10) . '-' . date('dmYhis') . '.' . $extension;
+            $file->storeAs('public/pictures/', $picture);
+
+            if(Storage::exists('public/pictures/' . $book->picture)){
+                Storage::delete('public/pictures/' . $book->picture);
+            }
+
+            $book->update([
+                'judul' => $request->judul,
+                'sinopsis' => $request -> sinopsis,
+                'penulis' => $request -> penulis,
+                'tahun_terbit' => $request -> tahun_terbit,
+                'picture' => $picture,
+                'category_id' => $request -> category_id
+            ]);
+        }
 
         return redirect(route('managePage'));
     }
 
     public function deleteBook($id){
         $book = Book::findOrFail($id);
+
+        if(Storage::exists('public/pictures/' . $book->picture)){
+            Storage::delete('public/pictures/' . $book->picture);
+        }
 
         $book->delete();
 

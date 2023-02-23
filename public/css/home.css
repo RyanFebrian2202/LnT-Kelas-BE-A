@@ -1,0 +1,19 @@
+img{
+    width: 200px;
+    height: 300px;
+}
+
+#content .card{
+    width: 250px;
+}
+
+#content .card-body{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+span{
+    width: auto;
+}

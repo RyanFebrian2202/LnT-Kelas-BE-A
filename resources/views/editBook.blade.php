@@ -24,8 +24,8 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="mb-3">
-                <label for="" class="form-label">penerbit</label>
-                <input type="text" class="form-control" name="penerbit" value="{{$book->penerbit}}">
+                <label for="" class="form-label">penulis</label>
+                <input type="text" class="form-control" name="penulis" value="{{$book->penulis}}">
             </div>
             @error('penulis')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -38,6 +38,10 @@
             <div class="mb-3">
                 <label for="" class="form-label">Tahun Terbit</label>
                 <input type="number" class="form-control" name="tahun_terbit" value="{{$book->tahun_terbit}}">
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Picture</label>
+              <input type="file" class="form-control" name="picture">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Category</label>

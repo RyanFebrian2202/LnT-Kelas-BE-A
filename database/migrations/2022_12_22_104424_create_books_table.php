@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->string('penulis');
             $table->string('sinopsis');
-            $table->string('penerbit');
             $table->integer('tahun_terbit');
+            $table->string('picture');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')
                             ->onUpdate('cascade')

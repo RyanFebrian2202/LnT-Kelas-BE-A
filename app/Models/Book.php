@@ -14,6 +14,7 @@ class Book extends Model
         'sinopsis',
         'penulis',
         'tahun_terbit',
+        'picture',
         'category_id'
     ];
 

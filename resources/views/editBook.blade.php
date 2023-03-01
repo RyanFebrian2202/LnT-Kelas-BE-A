@@ -24,7 +24,7 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="mb-3">
-                <label for="" class="form-label">penulis</label>
+                <label for="" class="form-label">Penulis</label>
                 <input type="text" class="form-control" name="penulis" value="{{$book->penulis}}">
             </div>
             @error('penulis')

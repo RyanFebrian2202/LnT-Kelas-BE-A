@@ -3,7 +3,19 @@ img{
     height: 300px;
 }
 
+.card-container{
+    display: flex;
+    gap: 50px;
+}
+
+#content{
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+
 #content .card{
+    display: flex;
     width: 250px;
 }
 
@@ -14,6 +26,12 @@ img{
     gap: 15px;
 }
 
-span{
+#content span{
     width: auto;
+}
+
+#content .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

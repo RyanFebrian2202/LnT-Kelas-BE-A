@@ -15,6 +15,8 @@
               <th scope="col">#</th>
               <th scope="col">Judul Buku</th>
               <th scope="col">Category</th>
+              <th scope="col">Penulis</th>
+              <th scope="col">Tahun</th>
               <th scope="col">Aksi</th>
             </tr>
           </thead>
@@ -27,11 +29,8 @@
               <th scope="row">{{$nomor++}}</th>
               <td>{{$book->judul}}</td>
               <td>{{$book->category->name}}</td>
-              <td>
-                @foreach ($book->authors as $author)
-                  - {{$author->nama}} ({{$author->status->status}})<br>
-                @endforeach
-              </td>
+              <td>{{$book->penulis}}</td>
+              <td>{{$book->tahun_terbit}}</td>
               <td>
                 <div style="display: flex; gap: 5px">
                   <a href="{{route('getUpdateBook',$book->id)}}">

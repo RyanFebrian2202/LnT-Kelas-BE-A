@@ -26,20 +26,23 @@
 </div>
 
 <section id="content">
-    <div class="row row-cols-1 row-cols-md-3 g-4 m-2 mb-5">
-        <div class="col">
-            @foreach ($books as $book)
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{$book->judul}}</h5>
+    <div class="card-container col">
+        @foreach ($books as $book)
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title">{{$book->judul}}</h5>
+                <div class="image-container">
                     <img src="{{asset('storage/pictures/'.$book->picture)}}" alt="picture">
-                    <span class="badge bg-primary">{{$book->penulis}}</span>
-                    <span class="badge bg-primary">{{$book->tahun_terbit}}</span>
-                    <p class="card-text">{{$book->sinopsis}}</p>
                 </div>
+                <span class="badge bg-primary">{{$book->penulis}}</span>
+                <span class="badge bg-success">{{$book->tahun_terbit}}</span>
+                <p><b>Sinopsis:</b>
+                    <br>
+                    {{$book->sinopsis}}
+                </p>
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
 </section>
 

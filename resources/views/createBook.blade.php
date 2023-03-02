@@ -23,7 +23,7 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="mb-3">
-                <label for="" class="form-label">penulis</label>
+                <label for="" class="form-label">Penulis</label>
                 <input type="text" class="form-control" name="penulis" value="{{old('penulis')}}">
             </div>
             @error('penulis')
@@ -34,7 +34,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sinopsis" value="{{old('sinopsis')}}">{{old('sinopsis')}}</textarea>
               </div>
             <div class="mb-3">
-                <label for="" class="form-label">Tahun Terbt</label>
+                <label for="" class="form-label">Tahun Terbit</label>
                 <input type="number" class="form-control" name="tahun_terbit" value="{{old('tahun_terbit')}}">
             </div>
             <div class="mb-3">

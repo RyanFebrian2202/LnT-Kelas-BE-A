@@ -36,11 +36,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('managePage')}}" tabindex="-1">Manage</a>
                 </li>
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('profile.edit')}}" tabindex="-1">Profile</a>
+                </li> 
+                @endauth
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            
+            @guest
+            <form action="{{route('register')}}" method="GET" enctype="multipart/form-data" class="d-flex">
+                @csrf
+                <button type="submit" class="btn btn-info">Register</button>
             </form>
+            <form action="{{route('login')}}" method="GET" enctype="multipart/form-data" class="d-flex">
+                @csrf
+                <button type="submit" class="btn btn-info">Login</button>
+            </form>
+            @endguest
+
+            @auth
+            <form action="{{route('logout')}}" method="POST" enctype="multipart/form-data" class="d-flex">
+                @csrf
+                <button type="submit" class="btn btn-info">Logout</button>
+            </form>
+            @endauth
         </div>
         </div>
     </nav>

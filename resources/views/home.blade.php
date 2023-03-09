@@ -7,6 +7,18 @@
 @endsection
 
 @section('content')
+@if(Auth::user())
+<div class="card m-3 bg-light border-0">
+    <div class="card-body d-flex flex-column gap-2">
+        <h2 class="card-title">Halo, {{Auth::user()->name}}</h2>
+        <form action="{{route('logout')}}" method="POST" enctype="multipart/form-data" class="d-flex">
+            @csrf
+            <button type="submit" class="btn btn-info">Logout</button>
+        </form>
+    </div>
+</div>
+<br>
+@endif
 <div class="card m-3 bg-light border-0">
     <div class="card-body d-flex flex-column gap-2">
         <h2 class="card-title">Perpustakaan</h2>

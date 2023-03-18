@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->date('dob');
             $table->string('birthPlace');
-            $table->string('gender');
+            $table->set('gender' ,['Male','Female']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->set('role',['User','Admin'])->default('User');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/',[DashboardController::class, 'getHomePage'])->name('homePage');
 Route::get('/contact',[DashboardController::class, 'getContactPage'])->name('contactPage');
+Route::post('/contact',[ContactController::class, 'store'])->name('storeContact');
 Route::get('/manage',[DashboardController::class, 'getManagePage'])->name('managePage');
 
 // Book
@@ -42,3 +44,7 @@ Route::patch('/manage/update/{id}',[BookController::class,'updateBook'])->name('
 
 Route::delete('/manage/delete/{id}',[BookController::class, 'deleteBook'])->name('deleteBook');
 
+
+Route::middleware(["auth"])->group(function(){
+
+});

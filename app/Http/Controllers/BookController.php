@@ -7,6 +7,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +40,8 @@ class BookController extends Controller
             'penulis' => $request -> penulis,
             'tahun_terbit' => $request -> tahun_terbit,
             'picture' => $picture,
-            'category_id' => $request -> category_id
+            'category_id' => $request -> category_id,
+            'user_id' => Auth::user()->id
         ]);
 
         return redirect(route('managePage'));
@@ -47,6 +49,11 @@ class BookController extends Controller
 
     public function getUpdateBook($id){
         $book = Book::findOrFail($id);
+
+        if(Auth::user()->id != $book->user_id && Auth::user()->role == 'User'){
+            return redirect(route('managePage'));
+        }
+
         $categories = Category::all();
         
         return view('editBook',compact('book','categories'));
@@ -54,6 +61,10 @@ class BookController extends Controller
 
     public function updateBook(BookRequest $request, $id){
         $book = Book::findOrFail($id);
+
+        if(Auth::user()->id != $book->user_id  && Auth::user()->role == 'User'){
+            return redirect(route('managePage'));
+        }
 
         if ($request->picture == null){
             $book->update([
@@ -95,6 +106,10 @@ class BookController extends Controller
 
     public function deleteBook($id){
         $book = Book::findOrFail($id);
+
+        if(Auth::user()->id != $book->user_id  && Auth::user()->role == 'User'){
+            return redirect(route('managePage'));
+        }
 
         if(Storage::exists('public/pictures/' . $book->picture)){
             Storage::delete('public/pictures/' . $book->picture);

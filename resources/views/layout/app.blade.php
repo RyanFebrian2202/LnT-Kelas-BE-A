@@ -40,6 +40,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('profile.edit')}}" tabindex="-1">Profile</a>
                 </li> 
+                @if (Auth::user()->role == 'Admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('manageCategories')}}" tabindex="-1">Manage Tags</a>
+                </li> 
+                @endif
                 @endauth
             </ul>
             

@@ -9,28 +9,25 @@
         
       </div>
       <div class="col-5">
-        <form class="container bg-light rounded-4 p-5 shadow">
-            <div class="d-flex justify-content-center">
+        <form action="{{route('postContact')}}" method="POST" enctype="multipart/form-data" class="container bg-light rounded-4 p-5 shadow">
+          @csrf  
+          <div class="d-flex justify-content-center">
                 <h2>Contact Us</h2>
             </div>
             <br>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Subjek</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="subject">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message"></textarea>
               </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>

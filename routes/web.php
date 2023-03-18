@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,14 +32,25 @@ require __DIR__.'/auth.php';
 
 Route::get('/',[DashboardController::class, 'getHomePage'])->name('homePage');
 Route::get('/contact',[DashboardController::class, 'getContactPage'])->name('contactPage');
-Route::get('/manage',[DashboardController::class, 'getManagePage'])->name('managePage');
+Route::post('/contact',[ContactController::class,'storeContact'])->name('postContact');
 
-// Book
-Route::get('/manage/create',[BookController::class, 'getCreateBook'])->name('getBookPage');
-Route::post('/manage/create',[BookController::class, 'createBook'])->name('createBook');
 
-Route::get('/manage/update/{id}',[BookController::class, 'getUpdateBook'])->name('getUpdateBook');
-Route::patch('/manage/update/{id}',[BookController::class,'updateBook'])->name('updateBook');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/manage',[DashboardController::class, 'getManagePage'])->name('managePage');
 
-Route::delete('/manage/delete/{id}',[BookController::class, 'deleteBook'])->name('deleteBook');
+    // Book
+    Route::get('/manage/create',[BookController::class, 'getCreateBook'])->name('getBookPage');
+    Route::post('/manage/create',[BookController::class, 'createBook'])->name('createBook');
+
+    Route::get('/manage/update/{id}',[BookController::class, 'getUpdateBook'])->name('getUpdateBook');
+    Route::patch('/manage/update/{id}',[BookController::class,'updateBook'])->name('updateBook');
+
+    Route::delete('/manage/delete/{id}',[BookController::class, 'deleteBook'])->name('deleteBook');
+});
+
+Route::middleware(['isAdmin'])->group(function(){
+    Route::get('/admin/manage/tags',[DashboardController::class,'getManageCategories'])->name('manageCategories');
+
+    Route::delete('/admin/manage/tags/delete/{id}',[DashboardController::class, 'deleteCategory'])->name('deleteCategory');
+});
 
